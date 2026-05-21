@@ -7,10 +7,14 @@
 ## 快速开始
 
 ```bash
-# 安装依赖
+# 1. 拉取代码
+git clone https://github.com/autumn231/rock-etf.git
+cd rock-etf
+
+# 2. 安装依赖
 pip install -r requirements.txt
 
-# 启动
+# 3. 启动
 streamlit run app.py
 ```
 
