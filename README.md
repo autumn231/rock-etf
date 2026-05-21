@@ -16,6 +16,21 @@ streamlit run app.py
 
 依赖：Python 3.10+，建议使用 conda 环境（`.bat` 启动脚本默认激活 `quant_env` 环境）。
 
+### Docker 部署
+
+```bash
+# 构建镜像
+docker build -t rock-etf .
+
+# 启动
+docker run -p 8501:8501 -v ./data_cache:/app/data_cache rock-etf
+
+# 或用 docker-compose
+docker-compose up
+```
+
+浏览器打开 `http://localhost:8501`。
+
 ---
 
 ## 我们获取了哪些数据？用来干什么？

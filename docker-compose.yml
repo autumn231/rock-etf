@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  rock-etf:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data_cache:/app/data_cache
