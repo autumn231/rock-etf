@@ -12,7 +12,7 @@ cd /d %APP_PATH%
 
 echo.
 echo 正在激活量化沙盒环境...
-call conda activate rock-etf_env
+call conda activate quant_env
 
 echo.
 echo 🚀 正在启动 Web 界面，请勿关闭此窗口...
