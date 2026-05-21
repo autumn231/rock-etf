@@ -19,13 +19,17 @@ streamlit run app.py
 ### Docker 部署
 
 ```bash
-# 构建镜像
+# 1. 拉取代码
+git clone https://github.com/autumn231/rock-etf.git
+cd rock-etf
+
+# 2. 构建镜像
 docker build -t rock-etf .
 
-# 启动
+# 3. 启动
 docker run -p 8501:8501 -v ./data_cache:/app/data_cache rock-etf
 
-# 或用 docker-compose
+# 或用 docker-compose（一步到位）
 docker-compose up
 ```
 
