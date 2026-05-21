@@ -217,15 +217,35 @@ def load_cached_history(name: str) -> pd.DataFrame | None:
 # ------------------------------------------------------------------
 
 
+# 沪深 300 日线列名映射（东方财富备用源返回中文列名 → 统一为英文）
+_COLUMN_MAP_CSI300 = {
+    "日期": "date",
+    "开盘": "open",
+    "收盘": "close",
+    "最高": "high",
+    "最低": "low",
+    "成交量": "volume",
+    "成交额": "amount",
+}
+
+
+def _normalize_csi300_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """统一沪深 300 日线列名：无论主源/备用源都产出英文列名"""
+    rename_map = {k: v for k, v in _COLUMN_MAP_CSI300.items() if k in df.columns}
+    if rename_map:
+        df = df.rename(columns=rename_map)
+    return df
+
+
 def _fetch_csi300() -> tuple[pd.DataFrame, str]:
-    """沪深 300 日线：主源失败自动切到东方财富"""
+    """沪深 300 日线：主源失败自动切到东方财富，统一列名为英文"""
     try:
         df = _ak_call(lambda: ak.stock_zh_index_daily(symbol="sh000300"))
-        return df, "主源"
+        return _normalize_csi300_columns(df), "主源"
     except Exception as e1:
         try:
             df = _ak_call(lambda: ak.stock_zh_index_daily_em(symbol="sh000300"))
-            return df, "备用(东方财富)"
+            return _normalize_csi300_columns(df), "备用(东方财富)"
         except Exception as e2:
             raise RuntimeError(
                 f"日线主源({e1}) / 备用({e2}) 均失败"

@@ -374,12 +374,12 @@ if new_capital > 0:
     st.divider()
     st.subheader("💰 新资金建仓方案")
 
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("总投入", f"¥{new_capital:,.2f}")
     c2.metric("股票", f"¥{new_capital * stock_pct / 100:,.0f}")
     c3.metric("城投债", f"¥{new_capital * bond_pct / 200:,.0f}")
     c4.metric("国债", f"¥{new_capital * bond_pct / 200:,.0f}")
-    c2.metric("黄金", f"¥{new_capital * gold_pct / 100:,.0f}", label_visibility="collapsed")
+    c5.metric("黄金", f"¥{new_capital * gold_pct / 100:,.0f}")
 
     st.info(
         f"📌 当前 PE 处于 {pe:.1f}% 分位 → {stock_pct}%股 + {bond_pct}%债 + {gold_pct}%金\n\n"
